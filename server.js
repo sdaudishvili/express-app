@@ -4,13 +4,17 @@ const config = require("config");
 
 const PORT = config.get("api.port");
 const HOST = config.get("api.host");
+
 const app = express();
-
-const router = require("./routing/routesCollection");
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use("/api", router);
+
+const booksRoute = require("./routes/booksRoute");
+const contactsRoute = require("./routes/contactsRoute");
+const aboutRoute = require("./routes/aboutRoute");
+app.use("/api/books", booksRoute);
+app.use("/api/contacts", contactsRoute);
+app.use("/api/about", aboutRoute);
 
 app.use((req, res) => {
   res.status(404).send({ url: `${req.originalUrl} not found` });
@@ -18,4 +22,4 @@ app.use((req, res) => {
 
 app.listen(PORT, HOST);
 
-console.log(`RESTful API server started on ${PORT}:${HOST}`);
+console.log(`Server started on ${PORT}:${HOST}`);

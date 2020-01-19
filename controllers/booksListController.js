@@ -4,7 +4,11 @@ const BookModel = require("../models/bookModel");
 class BooksListController extends ControllerBase {
   async getBooks() {
     try {
-      const books = [{ _id: 0 }, { _id: 1 }, { _id: 2 }];
+      const books = [
+        { _id: 0, name: "0" },
+        { _id: 1, name: "1" },
+        { _id: 2, name: "2" }
+      ];
       const resources = await Promise.all(
         books.map(async book => {
           const model = new BookModel(book);
