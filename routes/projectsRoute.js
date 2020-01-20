@@ -13,6 +13,17 @@ router.get("/", function(req, res, next) {
   }).getProjects();
 });
 
+router.get("/add", function(req, res, next) {
+  new ProjectsController({
+    params: req.params,
+    query: req.query,
+    body: req.body,
+    send: (statusCode, data) => {
+      sendFunc(res, statusCode, data);
+    }
+  }).addProject();
+});
+
 function sendFunc(res, statusCode, data) {
   res.status(statusCode).send(data);
 }

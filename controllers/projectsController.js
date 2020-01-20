@@ -23,6 +23,18 @@ class ProjectsController extends ControllerBase {
     }
   }
 
+
+  async addProject(obj) {
+    try {
+      console.log(this.params);
+      console.log(this.query);
+      console.log(this.body);
+      this.ok();
+    } catch (err) {
+      this.error(err);
+    }
+  }
+
   async getProject() {
     const { id } = this.params;
 
