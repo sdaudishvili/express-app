@@ -11,6 +11,7 @@
       "jsx": true
     }
   },
+
   "rules": {
     "semi": "error",
     "indent": ["error", 2, { "SwitchCase": 1 }],
