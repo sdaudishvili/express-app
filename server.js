@@ -2,12 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const config = require("config");
 
-const PORT = config.get("api.port");
-const HOST = config.get("api.host");
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+/* Config */
+const PORT = config.get("api.port");
+const HOST = config.get("api.host");
+const connectionString = config.get("api.connectionString");
 
 
 /* Routes */
@@ -23,10 +25,11 @@ app.use((req, res) => {
   res.status(404).send({ url: `${req.originalUrl} not found` });
 });
 
+
+
 /* Connect to mongoDB */
 const mongoose = require('mongoose');
-const uri = 'mongodb+srv://Admin:uLPVytVHYH7v6LPQ@cluster0-2tun0.azure.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

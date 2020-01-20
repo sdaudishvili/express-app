@@ -4,32 +4,25 @@ const ProjectModel = require("../models/projectModel");
 class ProjectsController extends ControllerBase {
   async getProjects() {
     try {
-      const projects = [
-        { _id: 0, name: "0" },
-        { _id: 1, name: "1" },
-        { _id: 2, name: "2" }
-      ];
-      const resources = await Promise.all(
-        projects.map(async project => {
-          const model = new ProjectModel(project);
-          const resource = await model.getResource();
-          return resource;
-        })
-      );
-
-      this.ok(resources);
+      const projects = await ProjectModel.find();
+      this.ok(projects);
     } catch (err) {
       this.error(err);
     }
   }
 
 
-  async addProject(obj) {
+  async addProject() {
     try {
-      console.log(this.params);
-      console.log(this.query);
-      console.log(this.body);
-      this.ok();
+      const newProject = new ProjectModel({
+        name: 'test3',
+        description: 'test3',
+        shortDescription: 'test3'
+      });
+
+      await newProject.save();
+      console.log('saved');
+      this.ok('new project added');
     } catch (err) {
       this.error(err);
     }

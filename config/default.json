@@ -1,6 +1,7 @@
 {
   "api": {
     "host": "localhost",
-    "port": 3000
+    "port": 3000,
+    "connectionString": "mongodb+srv://Admin:uLPVytVHYH7v6LPQ@cluster0-2tun0.azure.mongodb.net/test?retryWrites=true&w=majority"
   }
 }
