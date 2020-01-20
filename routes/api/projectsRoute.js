@@ -1,16 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const AboutController = require("../controllers/aboutController");
+const ProjectsController = require("../../controllers/projectsController");
 
 router.get("/", function(req, res, next) {
-  new AboutController({
+  new ProjectsController({
     params: req.params,
     query: req.query,
     body: req.body,
     send: (statusCode, data) => {
       sendFunc(res, statusCode, data);
     }
-  }).getAbout();
+  }).getProjects();
+});
+
+router.get("/add", function(req, res, next) {
+  new ProjectsController({
+    params: req.params,
+    query: req.query,
+    body: req.body,
+    send: (statusCode, data) => {
+      sendFunc(res, statusCode, data);
+    }
+  }).addProject();
 });
 
 function sendFunc(res, statusCode, data) {
