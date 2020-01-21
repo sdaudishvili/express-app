@@ -1,4 +1,24 @@
 extends layout.pug
 
 block content
+  div.content-header
     h1= message
+  div.content-sections
+    div.section-wrapper
+      div.container
+        div.row
+          div(class='section-title col-lg-3') Email
+          div(class='section-input col-lg-8')
+            input(type="text")
+    div.section-wrapper
+      div.container
+        div.row
+          div(class='section-title col-lg-3') Phone
+          div(class='section-input col-lg-8')
+            input(type="text")
+    div.section-wrapper
+      div.container
+        div.row
+          div(class='section-title col-lg-3') Address
+          div(class='section-input col-lg-8')
+            input(type="text")
