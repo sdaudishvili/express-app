@@ -7,7 +7,7 @@ router.get("/", function(req, res, next) {
     params: req.params,
     query: req.query,
     body: req.body,
-    send: (statusCode, data) => {
+    send: ({ statusCode, data }) => {
       sendFunc(res, statusCode, data);
     }
   }).getAbout();

@@ -7,21 +7,10 @@ router.get("/", function(req, res, next) {
     params: req.params,
     query: req.query,
     body: req.body,
-    send: (statusCode, data) => {
+    send: ({ statusCode, data }) => {
       sendFunc(res, statusCode, data);
     }
   }).getProjects();
-});
-
-router.get("/add", function(req, res, next) {
-  new ProjectsController({
-    params: req.params,
-    query: req.query,
-    body: req.body,
-    send: (statusCode, data) => {
-      sendFunc(res, statusCode, data);
-    }
-  }).addProject();
 });
 
 function sendFunc(res, statusCode, data) {

@@ -9,23 +9,22 @@ class ControllerBase {
   error(err) {
     const status = err.statusCode || err.status;
     const statusCode = status || 500;
-    this.send(statusCode, err);
+    this.send({ statusCode, err });
   }
 
   created(location, data) {
     if (location) {
-      this.send(201, null, location);
+      this.send({ statusCode: 201, data: null, location });
     }
-
-    this.send(201, data);
+    this.send({ statusCode: 201, data });
   }
 
   ok(data) {
-    this.send(200, data);
+    this.send({ statusCode: 200, data });
   }
 
   noContent() {
-    this.send(204);
+    this.send({ statusCode: 204 });
   }
 }
 

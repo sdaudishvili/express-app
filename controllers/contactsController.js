@@ -16,7 +16,7 @@ class ContactsController extends ControllerBase {
       const doc = await ContactsModel.findOne();
       for (const k in this.body) doc[k] = this.body[k];
       await doc.save();
-      this.ok(200);
+      this.created();
     } catch (err) {
       this.error(err);
     }
