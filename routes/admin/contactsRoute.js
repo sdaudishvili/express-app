@@ -8,14 +8,17 @@ router.get("/", async function(req, res) {
     params: req.params,
     query: req.query,
     body: req.body,
-    send: (statusCode, data) => {
+    send: ({ statusCode, data }) => {
       contactsInfo = data;
     }
   }).getContacts();
   res.render("contacts", {
     title: "Hey",
     message: "contact page",
-    contactsInfo
+    contactsInfo,
+    myfunc: () => {
+      console.log("asdf");
+    }
   });
 });
 
