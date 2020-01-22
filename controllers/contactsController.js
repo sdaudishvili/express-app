@@ -1,15 +1,22 @@
 const ControllerBase = require("./controllerBase");
+const ContactsModel = require("../models/contactsModel");
 
 class ContactsController extends ControllerBase {
-  getContacts() {
+  async getContacts() {
     try {
-      const contacts = {
-        phone: "55555555",
-        address: "adsfasdfasdf",
-        email: "asdfasd@gmail.com"
-      };
-
+      const contacts = await ContactsModel.findOne();
       this.ok(contacts);
+    } catch (err) {
+      this.error(err);
+    }
+  }
+
+  async updateContacts() {
+    try {
+      const doc = await ContactsModel.findOne();
+      for (const k in this.body) doc[k] = this.body[k];
+      await doc.save();
+      this.ok(200);
     } catch (err) {
       this.error(err);
     }
