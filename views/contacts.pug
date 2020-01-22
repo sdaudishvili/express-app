@@ -9,16 +9,18 @@ block content
         div.row
           div(class='section-title col-lg-3') Email
           div(class='section-input col-lg-8')
-            input(type="text")
+            input(type="text" name='email')
     div.section-wrapper
       div.container
         div.row
           div(class='section-title col-lg-3') Phone
           div(class='section-input col-lg-8')
-            input(type="text")
+            input(type="text" name='phone')
     div.section-wrapper
       div.container
         div.row
           div(class='section-title col-lg-3') Address
           div(class='section-input col-lg-8')
-            input(type="text")
+            input(type="text" name='address')
+    div.section-wrapper
+      div(class='btn btn-primary' onclick='console.log("submit")') submit
