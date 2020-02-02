@@ -1,13 +1,31 @@
 const ControllerBase = require("./controllerBase");
+const AboutModel = require("../models/aboutModel");
 
 class AboutController extends ControllerBase {
-  getAbout() {
+  async getAbout() {
     try {
-      const about = {
-        about: "about us"
-      };
-
+      const about = await AboutModel.findOne();
       this.ok(about);
+    } catch (err) {
+      this.error(err);
+    }
+  }
+
+  async updateAbout() {
+    try {
+      const doc = await AboutModel.findOne();
+      if (doc === null) {
+        const about = new AboutModel({
+          title: this.body.title,
+          content: this.body.content
+        });
+        await about.save();
+      } else {
+        for (const k in this.body) doc[k] = this.body[k];
+        await doc.save();
+      }
+
+      this.created();
     } catch (err) {
       this.error(err);
     }

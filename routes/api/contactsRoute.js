@@ -7,8 +7,8 @@ router.get("/", function(req, res, next) {
     params: req.params,
     query: req.query,
     body: req.body,
-    send: ({ statusCode, data }) => {
-      sendFunc(res, statusCode, data);
+    send: ({ statusCode, data, err }) => {
+      send({ statusCode, data, err }, res);
     }
   }).getContacts();
 });
@@ -18,19 +18,22 @@ router.post("/", function(req, res, next) {
     params: req.params,
     query: req.query,
     body: req.body,
-    send: ({ statusCode }) => {
-      if (statusCode === 201) {
-        console.log("Contact has been succesfully updated");
-      } else {
-        console.log(statusCode + "code while updating contacts");
-      }
+    send: ({ statusCode, err }) => {
+      send({ statusCode, err }, res);
     }
   }).updateContacts();
-  res.redirect("/");
 });
 
-function sendFunc(res, statusCode, data) {
-  res.status(statusCode).send(data);
+function send({ statusCode, err, data }, res) {
+  if (err === undefined) {
+    if (statusCode === 201)
+      console.log("Contacts has been succesfully updated");
+    res.status(statusCode).send(data);
+  } else {
+    console.log(statusCode + " code while updating contacts");
+    console.log(err);
+    res.status(statusCode).send(err);
+  }
 }
 
 module.exports = router;

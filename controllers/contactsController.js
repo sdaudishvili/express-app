@@ -14,8 +14,18 @@ class ContactsController extends ControllerBase {
   async updateContacts() {
     try {
       const doc = await ContactsModel.findOne();
-      for (const k in this.body) doc[k] = this.body[k];
-      await doc.save();
+      if (doc === null) {
+        const contacts = new ContactsModel({
+          phone: this.body.phone,
+          email: this.body.email,
+          address: this.body.address
+        });
+        await contacts.save();
+      } else {
+        for (const k in this.body) doc[k] = this.body[k];
+        await doc.save();
+      }
+
       this.created();
     } catch (err) {
       this.error(err);
