@@ -1,10 +1,7 @@
 const ControllerBase = require("./controllerBase");
 const AdminModel = require("../models/adminModel");
-
-const jwt = require('jsonwebtoken');
-
-const secret = '#$%ASF%safd';
-
+const jwt = require("jsonwebtoken");
+const secret = require("config").api.secretString;
 
 class AdminCotroller extends ControllerBase {
   async getContacts() {
@@ -18,12 +15,15 @@ class AdminCotroller extends ControllerBase {
 
   async registerAdmin() {
     try {
-      const admin = await AdminModel.findOne({email: this.body.email});
+      const admin = await AdminModel.findOne({ email: this.body.email });
       if (admin !== null) {
-        this.send({statusCode: 409, data: 'User is already registered'});
+        this.send({ statusCode: 409, err: "User is already registered" });
       } else {
-        const newAdmin = new AdminModel({ email: this.body.email, password: this.body.password });
-        newAdmin.save((err) => {
+        const newAdmin = new AdminModel({
+          email: this.body.email,
+          password: this.body.password
+        });
+        newAdmin.save(err => {
           if (err) {
             this.error(err);
           } else {
@@ -36,24 +36,23 @@ class AdminCotroller extends ControllerBase {
     }
   }
 
-
   async authenticateAdmin() {
     try {
-      const admin = await AdminModel.findOne({email: this.body.email});
+      const admin = await AdminModel.findOne({ email: this.body.email });
       if (admin === null) {
-        this.send({statusCode: 401, data: 'Incorrect email or password'});
+        this.send({ statusCode: 401, err: "Incorrect email or password" });
       } else {
         admin.isCorrectPassword(this.body.password, (err, same) => {
           if (err) {
             this.error(err);
           } else if (!same) {
-            this.send({statusCode: 401, data: 'Incorrect email or password'});
+            this.send({ statusCode: 401, err: "Incorrect email or password" });
           } else {
             const payload = { email: this.body.email };
             const token = jwt.sign(payload, secret, {
-              expiresIn: '1h'
+              expiresIn: "1h"
             });
-            this.ok({token});
+            this.ok({ token });
           }
         });
       }

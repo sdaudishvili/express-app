@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ContactsController = require("../../controllers/ContactsController");
+const adminRoute = require("../../middlewares/adminRoute");
 
 router.get("/", function(req, res, next) {
   new ContactsController({
@@ -13,7 +14,7 @@ router.get("/", function(req, res, next) {
   }).getContacts();
 });
 
-router.post("/", function(req, res, next) {
+router.post("/", adminRoute, function(req, res, next) {
   new ContactsController({
     params: req.params,
     query: req.query,

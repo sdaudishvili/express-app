@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const AboutController = require("../../controllers/aboutController");
+const adminRoute = require("../../middlewares/adminRoute");
 
 router.get("/", function(req, res, next) {
   new AboutController({
@@ -13,7 +14,7 @@ router.get("/", function(req, res, next) {
   }).getAbout();
 });
 
-router.post("/", function(req, res, next) {
+router.post("/", adminRoute, function(req, res, next) {
   new AboutController({
     params: req.params,
     query: req.query,
