@@ -38,10 +38,12 @@ const apiProjectsRoute = require("./routes/api/projectsRoute");
 const apiContactsRoute = require("./routes/api/contactsRoute");
 const apiAboutRoute = require("./routes/api/aboutRoute");
 const apiUploadRoute = require("./routes/api/uploadRoute");
+const apiAuthRoute = require("./routes/api/authRoute");
 app.use("/api/projects", apiProjectsRoute);
 app.use("/api/contacts", apiContactsRoute);
 app.use("/api/about", apiAboutRoute);
 app.use("/api/upload", apiUploadRoute);
+app.use("/api/auth", apiAuthRoute);
 
 /* ADMIN Routes */
 const adminIndexRoute = require("./routes/admin/indexRoute");
