@@ -1,13 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const config = require("config");
-const cors = require('cors');
-
+const cors = require("cors");
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb', parameterLimit: 50000 }));
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-app.use(cors({origin: 'http://localhost:3000'}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+    limit: "50mb",
+    parameterLimit: 50000
+  })
+);
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(cors({ origin: ["http://localhost:3000", "http://localhost:5236"] }));
 
 app.set("view engine", "pug");
 
