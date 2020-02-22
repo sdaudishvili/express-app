@@ -13,6 +13,15 @@ router.post("/register", function(req, res, next) {
   }).registerAdmin();
 });
 
+/**
+ * This function comment is parsed by doctrine
+ * @route POST /auth/adminAuthenticate
+ * @group Auth
+ * @param {AdminModel.model} AdminModel.body.required - username or email
+ * @returns {object} 200 - Success
+ * @returns {Error}  default - Unexpected error
+ */
+
 router.post("/adminAuthenticate", function(req, res, next) {
   new AdminController({
     params: req.params,

@@ -23,6 +23,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^6.8.0",
+    "express-swagger-generator": "^1.1.17",
     "pug-lint": "^2.6.0"
   }
 }

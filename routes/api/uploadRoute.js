@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const sha256 = require("js-sha256");
-const adminRoute = require("../../middlewares/adminRoute");
+const Authorized = require("../../middlewares/Authorized");
 
 const fileTypes = ["jpg", "png", "jpeg", "bmp"];
 
@@ -28,7 +28,7 @@ const upload = multer({
   }
 }).single("image");
 
-router.post("/", adminRoute, function(req, res, next) {
+router.post("/", Authorized, function(req, res, next) {
   upload(req, res, function(err) {
     if (err instanceof multer.MulterError) {
       return res.status(500).send(err);

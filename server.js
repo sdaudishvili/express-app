@@ -4,6 +4,10 @@ const config = require("config");
 const cors = require("cors");
 
 const app = express();
+const expressSwagger = require("express-swagger-generator")(app);
+
+expressSwagger(require("./config/swaggerConfig"));
+
 app.use(
   bodyParser.urlencoded({
     extended: true,

@@ -1,9 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const AboutController = require("../../controllers/aboutController");
-const adminRoute = require("../../middlewares/adminRoute");
+const Authorized = require("../../middlewares/Authorized");
 
-router.get("/", function(req, res, next) {
+/**
+ * This function comment is parsed by doctrine
+ * @route GET /about
+ * @group about
+ * @returns {Object} 200 - Success
+ * @returns {Error}  default - Unexpected error
+ */
+router.get("/", Authorized, function(req, res, next) {
   new AboutController({
     params: req.params,
     query: req.query,
@@ -14,7 +21,7 @@ router.get("/", function(req, res, next) {
   }).getAbout();
 });
 
-router.post("/", adminRoute, function(req, res, next) {
+router.post("/", Authorized, function(req, res, next) {
   new AboutController({
     params: req.params,
     query: req.query,
