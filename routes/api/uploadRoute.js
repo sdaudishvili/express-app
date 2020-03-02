@@ -44,7 +44,7 @@ router.post("/CropImage", Authorized, async function(req, res, next) {
   const splittedSrcName = req.body.src.split(".");
   const outPutName = `${splittedSrcName[0]}&x=${req.body.x}&y=${
     req.body.y
-  }&width= ${req.body.width}&height=${
+  }&width=${req.body.width}&height=${
     req.body.height
   }.${splittedSrcName.pop()}`;
 
