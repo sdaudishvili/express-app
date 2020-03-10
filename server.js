@@ -84,5 +84,6 @@ db.once('open', () => console.log('connected to db'));
 
 app.listen(PORT, HOST);
 
-console.log(`Server started on ${HOST}:${PORT}`);
-//
+const colors = require('colors/safe');
+
+console.log(`${colors.red('Server started on')} ${colors.red.underline(`http://${HOST}:${PORT}/`)}`);
