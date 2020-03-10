@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
 const ProjectSchema = new mongoose.Schema({
-  id: Number,
-  name: String,
-  description: String,
-  shortDescription: String,
-  country: String,
-  language: String,
+  name: { type: String, default: '' },
+  description: { type: String, default: '' },
+  shortDescription: { type: String, default: '' },
+  country: { type: String, default: '' },
+  language: { type: String, default: 'en' },
+  finished: { type: Boolean, default: false },
+  createDate: { type: Date, default: Date.now },
 });
 
 
