@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const ContactsSchema = new mongoose.Schema({
-    phone: String,
-    email: String,
-    address: String
+    phone: { type: String, default: '' },
+    email: { type: String, default: '' },
+    address: { type: String, default: '' }
 });
 
 module.exports = mongoose.model('Contacts', ContactsSchema);

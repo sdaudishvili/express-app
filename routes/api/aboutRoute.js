@@ -23,7 +23,7 @@ function send({ statusCode, err, data }, res) {
  * @returns {Error}  default - Unexpected error
  */
 
-router.get('/', Authorized, (req, res, next) => {
+router.get('/', (req, res, next) => {
     new AboutController({
         params: req.params,
         query: req.query,
@@ -41,7 +41,7 @@ router.get('/', Authorized, (req, res, next) => {
  * @returns {Error}  default - Unexpected error
  */
 
-router.post('/', Authorized, (req, res, next) => {
+router.post('/', (req, res, next) => {
     new AboutController({
         params: req.params,
         query: req.query,

@@ -7,13 +7,8 @@ const mongoose = require('mongoose');
  */
 
 const AboutSchema = new mongoose.Schema({
-    title: String,
-    content: String
-});
-
-AboutSchema.pre('save', function(next) {
-    console.log('asdf');
-    next();
+    title: { type: String, default: '' },
+    content: { type: String, default: '' }
 });
 
 module.exports = mongoose.model('About', AboutSchema);

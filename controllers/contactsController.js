@@ -22,7 +22,10 @@ class ContactsController extends ControllerBase {
                 });
                 await contacts.save();
             } else {
-                for (const k in this.body) doc[k] = this.body[k];
+                Object.keys(this.body).map((key) => {
+                    doc[key] = this.body[key];
+                    return false;
+                });
                 await doc.save();
             }
 
