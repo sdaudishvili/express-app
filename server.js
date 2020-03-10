@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const config = require('config');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const colors = require('colors/safe');
 
 const app = express();
 const expressSwagger = require('express-swagger-generator')(app);
@@ -83,7 +84,5 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => console.log('connected to db'));
 
 app.listen(PORT, HOST);
-
-const colors = require('colors/safe');
 
 console.log(`${colors.red('Server started on')} ${colors.red.underline(`http://${HOST}:${PORT}/`)}`);
