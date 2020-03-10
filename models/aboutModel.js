@@ -1,8 +1,19 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+
+/**
+ * @typedef AboutModel
+ * @property {string} title.required
+ * @property {string} content.required
+ */
 
 const AboutSchema = new mongoose.Schema({
-  title: String,
-  content: String
+    title: String,
+    content: String
 });
 
-module.exports = mongoose.model("About", AboutSchema);
+AboutSchema.pre('save', function(next) {
+    console.log('asdf');
+    next();
+});
+
+module.exports = mongoose.model('About', AboutSchema);

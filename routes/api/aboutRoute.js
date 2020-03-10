@@ -1,7 +1,19 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
-const AboutController = require("../../controllers/aboutController");
-const Authorized = require("../../middlewares/Authorized");
+const AboutController = require('../../controllers/aboutController');
+const Authorized = require('../../middlewares/Authorized');
+
+function send({ statusCode, err, data }, res) {
+    if (err === undefined) {
+        if (statusCode === 201) console.log('About us has been succesfully updated');
+        res.status(statusCode).send(data);
+    } else {
+        console.log(`${statusCode} code while updating about us`);
+        console.log(err);
+        res.status(statusCode).send(err);
+    }
+}
 
 /**
  * This function comment is parsed by doctrine
@@ -10,38 +22,32 @@ const Authorized = require("../../middlewares/Authorized");
  * @returns {Object} 200 - Success
  * @returns {Error}  default - Unexpected error
  */
-router.get("/", Authorized, function(req, res, next) {
-  new AboutController({
-    params: req.params,
-    query: req.query,
-    body: req.body,
-    send: ({ statusCode, data, err }) => {
-      send({ statusCode, data, err }, res);
-    }
-  }).getAbout();
+
+router.get('/', Authorized, (req, res, next) => {
+    new AboutController({
+        params: req.params,
+        query: req.query,
+        body: req.body,
+        send: (data) => send(data, res)
+    }).getAbout();
 });
 
-router.post("/", Authorized, function(req, res, next) {
-  new AboutController({
-    params: req.params,
-    query: req.query,
-    body: req.body,
-    send: ({ statusCode, err }) => {
-      send({ statusCode, err }, res);
-    }
-  }).updateAbout();
-});
+/**
+ * This function comment is parsed by doctrine
+ * @route POST /about
+ * @group about
+ * @param {AboutModel.model} AdminModel.body.required - username or email
+ * @returns {Object} 200 - Success
+ * @returns {Error}  default - Unexpected error
+ */
 
-function send({ statusCode, err, data }, res) {
-  if (err === undefined) {
-    if (statusCode === 201)
-      console.log("About us has been succesfully updated");
-    res.status(statusCode).send(data);
-  } else {
-    console.log(statusCode + " code while updating about us");
-    console.log(err);
-    res.status(statusCode).send(err);
-  }
-}
+router.post('/', Authorized, (req, res, next) => {
+    new AboutController({
+        params: req.params,
+        query: req.query,
+        body: req.body,
+        send: (data) => send(data, res)
+    }).updateAbout();
+});
 
 module.exports = router;
