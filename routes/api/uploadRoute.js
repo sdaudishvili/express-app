@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const sha256 = require('js-sha256');
-const sharp = require('sharp');
 const Authorized = require('../../middlewares/Authorized');
 
 const fileTypes = ['jpg', 'png', 'jpeg', 'bmp'];
@@ -37,24 +36,6 @@ router.post('/', Authorized, function(req, res, next) {
         }
         return res.status(200).send(req.file);
     });
-});
-
-router.post('/CropImage', Authorized, async function(req, res, next) {
-    const splittedSrcName = req.body.src.split('.');
-    const outPutName = `${splittedSrcName[0]}&x=${req.body.x}&y=${req.body.y}&width=${
-        req.body.width
-    }&height=${req.body.height}.${splittedSrcName.pop()}`;
-
-    sharp(`assets/images/${req.body.src}`)
-        .extract({
-            left: req.body.x,
-            top: req.body.y,
-            width: req.body.width,
-            height: req.body.height
-        })
-        .toFile(`assets/images/${outPutName}`)
-        .then(() => res.status(200).send(outPutName))
-        .catch((err) => res.status(400).send(err));
 });
 
 module.exports = router;
