@@ -3,7 +3,11 @@ const express = require('express');
 const router = express.Router();
 const ProjectsController = require('../../controllers/projectsController');
 
-router.get('/', function(req, res, next) {
+function sendFunc(res, statusCode, data) {
+    res.status(statusCode).send(data);
+}
+
+router.get('/', (req, res, next) => {
     new ProjectsController({
         params: req.params,
         query: req.query,
@@ -13,9 +17,5 @@ router.get('/', function(req, res, next) {
         }
     }).getProjects();
 });
-
-function sendFunc(res, statusCode, data) {
-    res.status(statusCode).send(data);
-}
 
 module.exports = router;
