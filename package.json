@@ -6,7 +6,7 @@
         "lintfix": "eslint --fix --ext .js, --ignore-path .gitignore ."
     },
     "dependencies": {
-        "bcrypt": "^3.0.6",
+        "bcrypt": "^5.0.0",
         "colors": "^1.4.0",
         "config": "^3.2.5",
         "cookie-parser": "~1.4.4",
